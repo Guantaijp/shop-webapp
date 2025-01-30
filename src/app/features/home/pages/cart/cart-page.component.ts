@@ -107,8 +107,9 @@ import { FormsModule } from '@angular/forms';
                             <p class="text-gray-600">Subtotal ({{ totalItems }} items)</p>
                             <p class="text-xl font-bold">Kes {{ total | number:'1.2-2' }}</p>
                         </div>
-                        <button 
-                            routerLink="/checkout"
+                        <button
+                                [routerLink]="['/checkout']"
+                           
                             class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
                         >
                             Proceed to Checkout
