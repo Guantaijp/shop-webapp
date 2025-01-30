@@ -127,7 +127,11 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                             </svg>
                             <span class="text-xs">Categories</span>
                         </a>
-                        <a href="#" class="text-center">
+                        <a
+                                [routerLink]="['/cart']"
+                                routerLinkActive="text-yellow-500"
+                                class="text-center"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
