@@ -25,6 +25,9 @@ export class ApiService {
 
         return this.http.get<any[]>(`${this.apiUrl}/products`, { params: httpParams });
     }
+    getProduct(id: number): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/products/${id}`);
+    }
 
     getProductsByTitle(title: string): Observable<any[]> {
         return this.http.get<any[]>(`${this.apiUrl}/products`, { params: { title } });

@@ -94,7 +94,9 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                     <a href="#" class="text-blue-600 text-sm">View all</a>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div *ngFor="let product of products" class="border rounded-lg p-4">
+                    <div *ngFor="let product of products"
+                         class="border rounded-lg p-4 cursor-pointer hover:shadow-lg transition duration-200"
+                         [routerLink]="['/product', product.id]">
                         <img [src]="product.images[0]" class="w-full h-32 object-cover mb-2" [alt]="product.title">
                         <h3 class="font-semibold text-sm mb-1">{{ product.title }}</h3>
                         <p class="text-green-600">Kes {{ product.price }}</p>
