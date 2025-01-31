@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ApiService } from '../../../../core/services/api.service';
 import { HttpClientModule } from "@angular/common/http";
@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Component({
     selector: 'app-home-page',
     standalone: true,
-    imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
+    imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, NgOptimizedImage],
     template: `
         <div class="container mx-auto px-4 py-4 mt-16">
             <!-- Search Bar -->
@@ -18,7 +18,9 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                 <div class="flex items-center bg-gray-100 rounded-lg p-2">
                     <span class="text-gray-500 mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            <path fill-rule="evenodd"
+                                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                  clip-rule="evenodd"/>
                         </svg>
                     </span>
                     <input
@@ -40,12 +42,12 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                                 <h3 class="font-bold text-lg">WINNING CASH</h3>
                                 <p class="text-sm">WEDNESDAY</p>
                             </div>
-                            <img src="/api/placeholder/80/80" class="ml-auto" alt="promo">
+                            <img ngSrc="../../../../../../assets/promo1.png" width="128" height="128" alt="promo" />
                         </div>
                         <p class="mt-2 text-sm">Lorem ipsum KSH 1000</p>
                     </div>
                     <div class="bg-gray-800 rounded-lg p-4 text-white flex items-center justify-center">
-                        <img src="/api/placeholder/80/80" alt="promo">
+                        <img ngSrc="/assets/promo1.png" class="w-32" alt="promo" height="360" width="360">
                     </div>
                 </div>
             </div>
@@ -95,11 +97,12 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div *ngFor="let product of products"
-                         class="border rounded-lg p-4 cursor-pointer hover:shadow-lg transition duration-200"
+                         class="shadow-md rounded-lg  cursor-pointer hover:shadow-lg transition duration-200"
                          [routerLink]="['/product', product.id]">
-                        <img [src]="product.images[0]" class="w-full h-32 object-cover mb-2" [alt]="product.title">
-                        <h3 class="font-semibold text-sm mb-1">{{ product.title }}</h3>
-                        <p class="text-green-600">Kes {{ product.price }}</p>
+                        <img [src]="product.images[0]" class="w-full h-[174px] object-cover mb-2 rounded-t"
+                             [alt]="product.title">
+                        <h3 class="font-medium text-sm mb-1 px-2">{{ product.title }}</h3>
+                        <p class="text-green-600 px-2 pb-2">Kes {{ product.price }}</p>
                     </div>
                 </div>
                 <div *ngIf="products.length === 0" class="text-center py-4">
@@ -112,8 +115,10 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                 <div class="container mx-auto">
                     <div class="flex justify-between items-center px-4 py-3">
                         <a href="#" class="text-center text-yellow-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                             </svg>
                             <span class="text-xs">Home</span>
                         </a>
@@ -122,8 +127,10 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                                 routerLinkActive="text-yellow-500"
                                 class="text-center"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 6h16M4 12h16M4 18h16"/>
                             </svg>
                             <span class="text-xs">Categories</span>
                         </a>
@@ -132,20 +139,26 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
                                 routerLinkActive="text-yellow-500"
                                 class="text-center"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                             </svg>
                             <span class="text-xs">My Cart</span>
                         </a>
                         <a href="#" class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <span class="text-xs">Payments</span>
                         </a>
                         <a href="#" class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 6h16M4 12h16m-7 6h7"/>
                             </svg>
                             <span class="text-xs">More</span>
                         </a>

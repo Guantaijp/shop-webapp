@@ -110,7 +110,7 @@ import { FormsModule } from '@angular/forms';
                         <button
                                 [routerLink]="['/checkout']"
                            
-                            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+                            class="px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-blue-700 transition duration-200"
                         >
                             Proceed to Checkout
                         </button>
