@@ -9,20 +9,20 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex space-x-6">
-                <a routerLink="/products"
-                   routerLinkActive="text-blue-600"
-                   class="hover:text-blue-600 transition-colors">
-                    Products
-                </a>
-                <a routerLink="/categories"
+<!--                <a routerLink="/products"-->
+<!--                   routerLinkActive="text-blue-600"-->
+<!--                   class="hover:text-blue-600 transition-colors">-->
+<!--                    Products-->
+<!--                </a>-->
+                <a  [routerLink]="['/categories']"
                    routerLinkActive="text-blue-600"
                    class="hover:text-blue-600 transition-colors">
                     Categories
                 </a>
-                <a routerLink="/cart"
+                <a  [routerLink]="['/cart']"
                    routerLinkActive="text-blue-600"
                    class="hover:text-blue-600 transition-colors">
-                    Cart (0)
+                    Cart
                 </a>
             </div>
 
