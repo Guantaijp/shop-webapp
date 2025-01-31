@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { CartItem, CartService } from '../../../../core/services/cart.service';
 
 interface CheckoutStep {
@@ -12,7 +12,7 @@ interface CheckoutStep {
 @Component({
     selector: 'app-checkout',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.scss']
 })
