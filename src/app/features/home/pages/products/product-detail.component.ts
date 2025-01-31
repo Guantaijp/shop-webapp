@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService } from '../../../../core/services/api.service';
 import { CartItem, CartService } from "../../../../core/services/cart.service";
 
@@ -8,140 +8,8 @@ import { CartItem, CartService } from "../../../../core/services/cart.service";
     selector: 'app-product-detail',
     standalone: true,
     imports: [CommonModule, RouterLinkActive, RouterLink],
-    template: `
-        <div class="container mx-auto px-4 py-4 mt-16">
-            <!-- Toast Notification -->
-            <div *ngIf="showToast"
-                 class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-500"
-                 [class.opacity-0]="toastFading"
-                 [class.opacity-100]="!toastFading">
-                <div class="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                    <span>Item added to cart successfully!</span>
-                </div>
-            </div>
-
-            <!-- Back Button -->
-            <button (click)="goBack()" class="mb-4 flex items-center text-gray-600 hover:text-gray-900 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Back
-            </button>
-
-            <!-- Loading State -->
-            <div *ngIf="isLoading" class="text-center py-4">
-                <p class="text-xl text-gray-600">Loading...</p>
-            </div>
-
-            <!-- Error State -->
-            <div *ngIf="error" class="text-center py-4 text-red-600">
-                <p>{{ error }}</p>
-            </div>
-
-            <!-- Product Details -->
-            <div *ngIf="product && !isLoading" class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <!-- Image Slider -->
-                <div class="relative h-64 mb-4">
-                    <img
-                            [src]="product.images[currentImageIndex]"
-                            class="w-full h-64 object-cover rounded-t-lg"
-                            [alt]="product.title"
-                    >
-                    <!-- Image Navigation -->
-                    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                        <button
-                                *ngFor="let image of product.images; let i = index"
-                                (click)="currentImageIndex = i"
-                                class="w-2 h-2 rounded-full transition-all"
-                                [class.bg-white]="i === currentImageIndex"
-                                [class.bg-gray-400]="i !== currentImageIndex"
-                        ></button>
-                    </div>
-                </div>
-
-                <!-- Product Info -->
-                <div class="p-4">
-                    <h1 class="text-3xl font-bold mb-2 text-gray-900">{{ product.title }}</h1>
-                    <p class="text-lg text-gray-600 mb-4">{{ product.description }}</p>
-
-                    <!-- Price and Category -->
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <p class="text-xl font-semibold text-green-600">
-                                Kes {{ product.price }}
-                            </p>
-                            <p class="text-sm text-gray-500">
-                                Category: {{ product.category?.name }}
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Add to Cart Button -->
-                    <button
-                            (click)="addToCart()"
-                            class="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-200"
-                    >
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-            <!-- Navigation Bar -->
-            <div class="fixed bottom-0 left-0 right-0 bg-white border-t">
-                <div class="container mx-auto">
-                    <div class="flex justify-between items-center px-4 py-3">
-                        <a href="#" class="text-center text-yellow-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            <span class="text-xs">Home</span>
-                        </a>
-                        <a
-                                [routerLink]="['/categories']"
-                                routerLinkActive="text-yellow-500"
-                                class="text-center"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                            <span class="text-xs">Categories</span>
-                        </a>
-                        <a
-                                [routerLink]="['/cart']"
-                                routerLinkActive="text-yellow-500"
-                                class="text-center"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                            </svg>
-                            <span class="text-xs">My Cart</span>
-                        </a>
-                        <a href="#" class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span class="text-xs">Payments</span>
-                        </a>
-                        <a href="#" class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                            </svg>
-                            <span class="text-xs">More</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `,
-    styles: [`
-        :host {
-            display: block;
-            min-height: 100vh;
-            background-color: #f9fafb;
-        }
-    `]
+    templateUrl: './product-detail.component.html',
+    styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
     product: any = null;
