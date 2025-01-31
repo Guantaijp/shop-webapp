@@ -12,7 +12,8 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
     standalone: true,
     imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, NgOptimizedImage],
     templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.css']
+    styleUrls: ['./home-page.component.css'],
+
 })
 export class HomePageComponent implements OnInit {
     categories: any[] = [];
@@ -21,7 +22,9 @@ export class HomePageComponent implements OnInit {
     error: string | null = null;
     searchQuery: string = '';
     selectedCategoryId: number | null = null;
+    promoImagePath = '../assets/promo1.png';
     private searchSubject = new Subject<string>();
+
 
     constructor(private apiService: ApiService) {
         // Set up search debounce
