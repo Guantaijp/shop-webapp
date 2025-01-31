@@ -19,4 +19,6 @@ import {SharedModule} from "./shared/shared.module";
     </div>
   `
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'shop-webapp';
+}

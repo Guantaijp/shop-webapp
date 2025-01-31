@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Component({
     selector: 'app-home-page',
     standalone: true,
-    imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, NgOptimizedImage],
+    imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.css'],
 
